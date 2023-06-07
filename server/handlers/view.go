@@ -51,6 +51,12 @@ func ViewGet(c *gin.Context) {
 			common.Err(c, "View Get failed:", err)
 		}
 	} else {
+
+		if len(data.Cards) == 0 {
+			NullCard := "this view does not have any cards"
+
+			data.Cards = []model.Card{{Name: &NullCard}}
+		}
 		common.OKData(c, data)
 	}
 }
