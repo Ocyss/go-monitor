@@ -17,7 +17,7 @@ type Card struct {
 
 func (c *Card) BeforeCreate(tx *gorm.DB) error {
 	var temp Card
-	if c.LinkID != nil || c.Sort != 0 {
+	if c.Sort != 0 {
 		return nil
 	}
 	err := tx.Order("sort desc").Where("view_id = ?", c.ViewID).Take(&temp).Error
