@@ -21,7 +21,7 @@ func ViewAdd(c *gin.Context) {
 		if errors.Is(err, gorm.ErrDuplicatedKey) {
 			common.Err(c, "Path repeated, this is a fatal error.", err)
 		} else {
-			common.Err(c, "View Add failed:", err)
+			common.Err(c, "View Add failed.", err)
 		}
 	} else {
 		common.OKData(c, data.ID)
@@ -30,7 +30,7 @@ func ViewAdd(c *gin.Context) {
 func ViewGets(c *gin.Context) {
 	data, err := db.ViewGets()
 	if err != nil {
-		common.Err(c, "View Gets failed:", err)
+		common.Err(c, "View Gets failed.", err)
 	} else {
 		common.OKData(c, data)
 	}
@@ -48,7 +48,7 @@ func ViewGet(c *gin.Context) {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 			common.Err(c, fmt.Sprintf("ID:%d that does not exist", id), err)
 		} else {
-			common.Err(c, "View Get failed:", err)
+			common.Err(c, "View Get failed.", err)
 		}
 	} else {
 

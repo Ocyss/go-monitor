@@ -24,7 +24,7 @@ func CardAdd(c *gin.Context) {
 		if errors.Is(err, &model.ErrEmptyLink{}) {
 			common.Err(c, err.Error(), err)
 		} else {
-			common.Err(c, "Card Add failed:", err)
+			common.Err(c, "Card Add failed.", err)
 		}
 	} else {
 		common.OKData(c, data.ID)
