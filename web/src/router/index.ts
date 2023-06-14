@@ -13,11 +13,13 @@ export const routes = [
   {
     path: "/admin",
     component: lazy(() => import("@/pages/admin")),
-    children: [
-      {
-        path: "/view",
-        // component: lazy(() => import())
-      },
-    ],
+  },
+  {
+    path: "/admin/view/:id",
+    component: lazy(() => import("@/pages/admin/view")),
+  },
+  {
+    path: "/*all",
+    component: lazy(() => import("@/pages/error/404")),
   },
 ];

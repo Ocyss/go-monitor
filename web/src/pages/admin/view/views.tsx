@@ -203,7 +203,7 @@ export default function Views() {
                 <TableCell align="center">
                   <IconButton
                     component="span"
-                    onClick={() => navigate(`/admin/view?id=${row.id}`, {})}
+                    onClick={() => navigate(`/admin/view/${row.id}`, {})}
                   >
                     <ConstructionIcon />
                   </IconButton>
