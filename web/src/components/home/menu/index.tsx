@@ -34,7 +34,7 @@ export default function ViewMenu(props: MenuProps) {
 
   const dialogClone = (index: number, id: number) => {
     dialog_show = false;
-    if (index > 0 && id > 0) {
+    if (index >= 0 && id > 0) {
       props.onSwitch(index, id);
       navigate(`/view/${id}`, { replace: true });
     }

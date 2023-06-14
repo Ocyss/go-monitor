@@ -5,7 +5,6 @@ import api from "@/api";
 import { Card, View } from "@/types";
 import { onMount } from "solid-js";
 import { useParams } from "@solidjs/router";
-import { number } from "echarts";
 
 let views: Array<View> = $signal([
   {

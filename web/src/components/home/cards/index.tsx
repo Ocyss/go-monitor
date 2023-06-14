@@ -18,8 +18,11 @@ export default function Cards(props: CardsProps) {
   return (
     <ThemeProvider theme={customTheme}>
       <Grid container spacing={2}>
-        {props.cards.map((data) => {
-          let s = Base64.decode(data.data);
+        {props.cards.map((item) => {
+          if (item.data == null) {
+            return <Grid item>{item.name}</Grid>;
+          }
+          let s = Base64.decode(item.data);
           let decStr: CardData = eval("(" + s + ")");
           return (
             <Grid item>
