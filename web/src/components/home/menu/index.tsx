@@ -31,10 +31,12 @@ function MenuDialog(props: MenuDialogProps) {
 export default function ViewMenu(props: MenuProps) {
   let dialog_show: boolean = $signal(false);
   const navigate = useNavigate();
+
   const dialogClone = (index: number, id: number) => {
     dialog_show = false;
     if (index > 0 && id > 0) {
       props.onSwitch(index, id);
+      navigate(`/view/${id}`, { replace: true });
     }
   };
   return (
@@ -51,15 +53,15 @@ export default function ViewMenu(props: MenuProps) {
         {props.menus[props.index].name}
       </Typography>
       <Typography
-        variant="h6"
-        component="div"
+        component="a"
         gutterBottom
-        onClick={() => navigate("/admin")}
+        href="/admin"
         class={style.title}
+        target="_blank"
       >
         Admin
       </Typography>
-      <br />
+      <br />i
       <MenuDialog
         open={dialog_show}
         onClose={dialogClone}

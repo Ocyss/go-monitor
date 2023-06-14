@@ -4,6 +4,8 @@ import Cards from "@/components/home/cards";
 import api from "@/api";
 import { Card, View } from "@/types";
 import { onMount } from "solid-js";
+import { useParams } from "@solidjs/router";
+import { number } from "echarts";
 
 let views: Array<View> = $signal([
   {
@@ -26,16 +28,31 @@ const switchView = (index: number, id: number) => {
 };
 
 export default function Home(): JSX.Element {
-  onMount(() => {
-    api.view.gets().then((res) => {
-      if (res.code == 200 && res.data) {
-        if (res.data.length != 0) {
-          views = res.data;
-        }
+  const params = useParams();
+  onMount(async () => {
+    const res = await api.view.gets();
+    if (res.code == 200 && res.data) {
+      if (res.data.length != 0) {
+        views = res.data;
       }
-    });
+    }
+    if (params.id != undefined) {
+      const id = Number(params.id);
+      if (
+        !views.some((item, index) => {
+          if (item.id == id) {
+            switchView(index, id);
+            return true;
+          }
+        })
+      ) {
+        switchView(0, 0);
+      }
+    } else {
+      switchView(0, 0);
+    }
   });
-  switchView(0, 0);
+
   return (
     <div>
       <Menu menus={views} index={viewIndex} onSwitch={switchView}></Menu>

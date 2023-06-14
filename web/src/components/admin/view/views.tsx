@@ -202,8 +202,9 @@ export default function Views() {
                 <TableCell align="center">{row.sort}</TableCell>
                 <TableCell align="center">
                   <IconButton
-                    component="span"
-                    onClick={() => navigate(`/admin/view/${row.id}`, {})}
+                    component="a"
+                    href={`/admin/view/${row.id}`}
+                    target="_blank"
                   >
                     <ConstructionIcon />
                   </IconButton>

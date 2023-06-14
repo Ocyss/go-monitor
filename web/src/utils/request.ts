@@ -3,7 +3,7 @@ import { Resp } from "@/types";
 import toast from "solid-toast";
 
 let request = axios.create({
-  baseURL: "api/",
+  baseURL: "/api",
   timeout: 8000,
 });
 
