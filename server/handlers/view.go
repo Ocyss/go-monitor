@@ -17,14 +17,18 @@ func ViewAdd(c *gin.Context) {
 		common.ErrParam(c, err)
 		return
 	}
-	if err := db.ViewAdd(&data); err != nil {
-		if errors.Is(err, gorm.ErrDuplicatedKey) {
-			common.Err(c, "Path repeated, this is a fatal error.", err)
-		} else {
-			common.Err(c, "View Add failed.", err)
-		}
+	if len(data.Path) < 3 || len(data.Name) < 3 {
+		common.Err(c, "the length of path or name is too short")
 	} else {
-		common.OKData(c, data.ID)
+		if err := db.ViewAdd(&data); err != nil {
+			if errors.Is(err, gorm.ErrDuplicatedKey) {
+				common.Err(c, "Path repeated, this is a fatal error.", err)
+			} else {
+				common.Err(c, "View Add failed.", err)
+			}
+		} else {
+			common.OKData(c, data.ID)
+		}
 	}
 }
 func ViewGets(c *gin.Context) {
