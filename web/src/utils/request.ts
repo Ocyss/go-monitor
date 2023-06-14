@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Resp } from "@/types";
+import toast from "solid-toast";
 
 let request = axios.create({
   baseURL: "api/",
@@ -21,7 +22,7 @@ request.interceptors.response.use(
     return res.data;
   },
   function (error) {
-    console.log("Error: " + error.message);
+    toast.error(error.response?.data?.msg, { duration: 10000 });
     return Promise.reject(error);
   }
 );

@@ -7,8 +7,9 @@ import {
   ListItemText,
   Typography,
 } from "@suid/material";
-
 import { MenuDialogProps, MenuProps } from "@/types";
+import style from "./menu.module.scss";
+import { useNavigate } from "@solidjs/router";
 
 function MenuDialog(props: MenuDialogProps) {
   return (
@@ -22,19 +23,6 @@ function MenuDialog(props: MenuDialogProps) {
             </ListItemButton>
           </ListItem>
         ))}
-        {/* <ListItem
-          onClick={() => handleListItemClick("addAccount")}
-          disablePadding
-        >
-          <ListItemButton autoFocus>
-            <ListItemAvatar>
-              <Avatar>
-                <AddIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary="Add account" />
-          </ListItemButton>
-        </ListItem> */}
       </List>
     </Dialog>
   );
@@ -42,7 +30,7 @@ function MenuDialog(props: MenuDialogProps) {
 
 export default function ViewMenu(props: MenuProps) {
   let dialog_show: boolean = $signal(false);
-
+  const navigate = useNavigate();
   const dialogClone = (index: number, id: number) => {
     dialog_show = false;
     if (index > 0 && id > 0) {
@@ -50,16 +38,26 @@ export default function ViewMenu(props: MenuProps) {
     }
   };
   return (
-    <div class="menu">
+    <div class={style.menu}>
       <Typography
         variant="h5"
         component="div"
+        gutterBottom
         onClick={() => {
           dialog_show = true;
         }}
-        style={"display: inline-block;cursor:pointer"}
+        class={style.title}
       >
         {props.menus[props.index].name}
+      </Typography>
+      <Typography
+        variant="h6"
+        component="div"
+        gutterBottom
+        onClick={() => navigate("/admin")}
+        class={style.title}
+      >
+        Admin
       </Typography>
       <br />
       <MenuDialog
