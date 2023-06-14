@@ -1,7 +1,7 @@
 import { CardData, CardsProps } from "@/types";
 import ThemeProvider from "@suid/system/ThemeProvider";
 import createTheme from "@suid/system/createTheme";
-import Card from "@/components/card/card";
+import Card from "@/components/home/card/card";
 import { Grid } from "@suid/material";
 import { Base64 } from "js-base64";
 

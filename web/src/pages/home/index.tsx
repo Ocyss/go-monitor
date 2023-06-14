@@ -1,6 +1,6 @@
 import { JSX } from "solid-js/jsx-runtime";
-import Menu from "./menu";
-import Cards from "./cards";
+import Menu from "@/components/home/menu";
+import Cards from "@/components/home/cards";
 import api from "@/api";
 import { Card, View } from "@/types";
 import { onMount } from "solid-js";
