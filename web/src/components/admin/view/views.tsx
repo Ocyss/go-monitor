@@ -2,8 +2,6 @@ import api from "@/api";
 import { View } from "@/types";
 import {
   Box,
-  Button,
-  Checkbox,
   IconButton,
   Paper,
   Table,

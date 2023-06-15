@@ -43,6 +43,7 @@ export default function Home(): JSX.Element {
             switchView(index, id);
             return true;
           }
+          return false;
         })
       ) {
         switchView(0, 0);

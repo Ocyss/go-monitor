@@ -2,22 +2,15 @@ import { onMount } from "solid-js";
 import * as echarts from "echarts";
 import { CardData } from "@/types";
 
-interface echartsProps {
-  data: CardData;
-}
-
-export default function E(props: echartsProps) {
+export default function E(props: CardData) {
   let e!: HTMLDivElement;
 
   onMount(() => {
     var myChart = echarts.init(e);
-    myChart.setOption(props.data.data);
+    myChart.setOption(props.data);
   });
 
   return (
-    <div
-      ref={e}
-      style={{ width: props.data.width, height: props.data.height }}
-    ></div>
+    <div ref={e} style={{ width: props.width, height: props.height }}></div>
   );
 }

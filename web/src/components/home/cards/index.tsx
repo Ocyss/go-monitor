@@ -26,7 +26,7 @@ export default function Cards(props: CardsProps) {
           let decStr: CardData = eval("(" + s + ")");
           return (
             <Grid item>
-              <Card data={decStr}></Card>
+              <Card {...decStr}></Card>
             </Grid>
           );
         })}

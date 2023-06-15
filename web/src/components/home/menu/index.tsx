@@ -61,7 +61,6 @@ export default function ViewMenu(props: MenuProps) {
       >
         Admin
       </Typography>
-      <br />i
       <MenuDialog
         open={dialog_show}
         onClose={dialogClone}

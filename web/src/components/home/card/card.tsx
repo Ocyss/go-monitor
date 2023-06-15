@@ -9,22 +9,16 @@ const CardComponent = styled("div")(({ theme }) => ({
   borderRadius: theme.shape.borderRadius,
 }));
 
-interface cardProps {
-  data: CardData;
-}
-
-export default function Card(props: cardProps) {
-  const { width, height, type, data } = props.data;
-
+export default function Card(props: CardData) {
   return (
-    <CardComponent style={{ width, height }}>
-      <Switch fallback={data}>
-        <Match when={type == "text"}>{data}</Match>
-        <Match when={type == "picture"}>
-          <image href={data}></image>
+    <CardComponent style={{ width: props.width, height: props.height }}>
+      <Switch fallback={props.data}>
+        <Match when={props.type == "text"}>{props.data}</Match>
+        <Match when={props.type == "picture"}>
+          <img src={props.data} style="width: 100%;height: 100%;"></img>
         </Match>
-        <Match when={type == "echarts"}>
-          <Echarts data={props.data}></Echarts>
+        <Match when={props.type == "echarts"}>
+          <Echarts {...props} data={props.data}></Echarts>
         </Match>
       </Switch>
     </CardComponent>

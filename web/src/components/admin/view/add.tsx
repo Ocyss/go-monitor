@@ -1,11 +1,9 @@
 import api from "@/api";
-import { ViewAddRequ } from "@/types";
 import {
   Button,
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle,
   TextField,
 } from "@suid/material";
