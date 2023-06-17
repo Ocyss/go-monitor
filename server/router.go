@@ -19,5 +19,6 @@ func Init(r *gin.Engine) {
 	router.POST("view/add", handlers.ViewAdd)
 	router.GET("view/gets", handlers.ViewGets)
 	router.GET("view/get", handlers.ViewGet)
+	router.GET("view/check", handlers.ViewCheck)
 	router.POST("card/add", handlers.CardAdd)
 }

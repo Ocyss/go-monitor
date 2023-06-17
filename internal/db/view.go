@@ -22,3 +22,8 @@ func ViewGet(id uint) (*model.View, error) {
 	}).Order("view.sort").Where(&model.Model{ID: id}).Take(&data).Error
 	return &data, err
 }
+
+func ViewCheck(id uint) bool {
+	err := db.Where("id = ?", id).Take(&model.View{}).Error
+	return err == nil
+}

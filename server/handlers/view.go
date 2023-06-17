@@ -64,3 +64,12 @@ func ViewGet(c *gin.Context) {
 		common.OKData(c, data)
 	}
 }
+func ViewCheck(c *gin.Context) {
+	sid := c.Query("id")
+	id, err := strconv.Atoi(sid)
+	if sid != "" && err == nil && db.ViewCheck(uint(id)) {
+		common.OKData(c, true)
+	} else {
+		common.OKData(c, false)
+	}
+}
