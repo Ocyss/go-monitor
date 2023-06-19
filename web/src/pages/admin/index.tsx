@@ -1,10 +1,10 @@
-import Views from "@/components/admin/view/views";
-import AddView from "@/components/admin/view/add";
+import ViewTable from "@/components/admin/view/ViewTable";
+import AddView from "@/components/admin/view/AddView";
 export default function Admin() {
   return (
     <div class="admin-main">
       <AddView />
-      <Views />
+      <ViewTable />
     </div>
   );
 }

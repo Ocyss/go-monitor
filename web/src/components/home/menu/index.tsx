@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@suid/material";
 import { MenuDialogProps, MenuProps } from "@/types";
-import style from "./menu.module.scss";
+import style from "./style.module.scss";
 import { useNavigate } from "@solidjs/router";
 
 function MenuDialog(props: MenuDialogProps) {
@@ -31,7 +31,7 @@ function MenuDialog(props: MenuDialogProps) {
 export default function ViewMenu(props: MenuProps) {
   let dialog_show: boolean = $signal(false);
   const navigate = useNavigate();
-
+  let time = $signal("");
   const dialogClone = (index: number, id: number) => {
     dialog_show = false;
     if (index >= 0 && id > 0) {
@@ -39,6 +39,14 @@ export default function ViewMenu(props: MenuProps) {
       navigate(`/view/${id}`, { replace: true });
     }
   };
+  setInterval(() => {
+    const now = new Date();
+    const hours = String(now.getHours()).padStart(2, "0");
+    const minutes = String(now.getMinutes()).padStart(2, "0");
+    const seconds = String(now.getSeconds()).padStart(2, "0");
+    time = `${hours}:${minutes}:${seconds}`;
+  }, 1000);
+
   return (
     <div class={style.menu}>
       <Typography
@@ -52,6 +60,7 @@ export default function ViewMenu(props: MenuProps) {
       >
         {props.menus[props.index].name}
       </Typography>
+      <div>{time}</div>
       <Typography
         component="a"
         gutterBottom

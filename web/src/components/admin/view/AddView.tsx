@@ -9,7 +9,7 @@ import {
 } from "@suid/material";
 import toast from "solid-toast";
 
-export default function FormDialog() {
+export default function AddView() {
   let open: boolean = $signal(false);
   let name = $signal("");
   let path = $signal("");
@@ -25,7 +25,7 @@ export default function FormDialog() {
     }
   };
   return (
-    <div>
+    <>
       <Button
         variant="contained"
         onClick={() => {
@@ -66,6 +66,6 @@ export default function FormDialog() {
           <Button onClick={handleSubmit}>Submit</Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </>
   );
 }

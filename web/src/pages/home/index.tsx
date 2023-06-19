@@ -1,10 +1,11 @@
 import { JSX } from "solid-js/jsx-runtime";
 import Menu from "@/components/home/menu";
-import Cards from "@/components/home/cards";
+import Cards from "@/components/home/card/cards";
 import api from "@/api";
 import { Card, View } from "@/types";
 import { onMount } from "solid-js";
 import { useParams } from "@solidjs/router";
+import { Box } from "@suid/material";
 
 let views: Array<View> = $signal([
   {
@@ -25,7 +26,6 @@ const switchView = (index: number, id: number) => {
     }
   });
 };
-
 export default function Home(): JSX.Element {
   const params = useParams();
   onMount(async () => {
@@ -54,11 +54,11 @@ export default function Home(): JSX.Element {
   });
 
   return (
-    <div>
+    <Box>
       <Menu menus={views} index={viewIndex} onSwitch={switchView}></Menu>
       <div class="cards">
         <Cards cards={cards}></Cards>
       </div>
-    </div>
+    </Box>
   );
 }

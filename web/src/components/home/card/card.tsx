@@ -7,6 +7,11 @@ const CardComponent = styled("div")(({ theme }) => ({
   backgroundColor: theme.palette.primary.main,
   padding: theme.spacing(1),
   borderRadius: theme.shape.borderRadius,
+  boxShadow: theme.palette.boxShadow,
+  transition: theme.palette.transition,
+  "&:hover": {
+    boxShadow: theme.palette.boxShadowHover,
+  },
 }));
 
 export default function Card(props: CardData) {

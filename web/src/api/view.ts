@@ -23,3 +23,11 @@ export function add(data: ViewAddRequ): Resp<number> {
     data,
   });
 }
+
+export function check(id: any): Resp<boolean> {
+  return request({
+    method: "get",
+    url: "view/check",
+    params: { id },
+  });
+}

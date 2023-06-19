@@ -12,7 +12,7 @@ import {
   TableRow,
 } from "@suid/material";
 import { createMemo, createSignal, mapArray, onMount } from "solid-js";
-import style from "./view.module.scss";
+import style from "./style.module.scss";
 import ConstructionIcon from "@suid/icons-material/Construction";
 import { useNavigate } from "@solidjs/router";
 const [rows, setRows] = createSignal<Array<View>>([]);
@@ -130,7 +130,7 @@ function EnhancedTableHead(props: EnhancedTableProps) {
   );
 }
 
-export default function Views() {
+export default function ViewTable() {
   const [order, setOrder] = createSignal<Order>("asc");
   const [orderBy, setOrderBy] = createSignal<keyof View>("sort");
   const navigate = useNavigate();

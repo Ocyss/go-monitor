@@ -19,7 +19,7 @@ export const routes = [
     component: lazy(() => import("@/pages/admin/view")),
   },
   {
-    path: "/*all",
+    path: ["/err/404", "/*all"],
     component: lazy(() => import("@/pages/error/404")),
   },
 ];
