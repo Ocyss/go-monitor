@@ -16,3 +16,18 @@ export function createLocalStore<T extends object>(
   createEffect(() => localStorage.setItem(name, JSON.stringify(state)));
   return [state, setState];
 }
+
+export function getKebabCase(str: string) {
+  let temp = str.replace(/[A-Z]/g, function (i) {
+    return "_" + i.toLowerCase();
+  });
+  if (temp.slice(0, 1) === "_") {
+    temp = temp.slice(1); //如果首字母是大写，执行replace时会多一个_，需要去掉
+  }
+  return temp;
+}
+export function getCamelCase(str: string) {
+  return str.replace(/-([a-z])/g, function (all, i) {
+    return i.toLowerCase();
+  });
+}
