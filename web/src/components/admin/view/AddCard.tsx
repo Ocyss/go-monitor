@@ -6,7 +6,6 @@ import {
   DialogContent,
   TextField,
   DialogActions,
-  createTheme,
   ThemeProvider,
   MenuItem,
   Select,
@@ -20,13 +19,21 @@ import { Base64 } from "js-base64";
 import api from "@/api";
 import toast from "solid-toast";
 import { StoObject } from "@/utils";
+import { createSignal } from "solid-js";
+import createTheme from "@suid/system/createTheme";
 
 const customTheme = createTheme({
   palette: {
     primary: {
-      main: "#1976d2",
-      contrastText: "white",
+      main: "#ffffff",
+      contrastText: "black",
     },
+    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.3)",
+    boxShadowHover: "0 4px 9px rgba(0, 0, 0, 0.3)",
+    transition: "0.2s ease-in-out;",
+  },
+  shape: {
+    borderRadius: 8,
   },
 });
 
@@ -35,10 +42,16 @@ export default function adminView() {
   const vid = params.id;
   let open = $signal(false);
   let name = $signal("");
-  let width = $signal("500px");
-  let height = $signal("300px");
-  let type: "text" | "picture" | "echarts" = $signal("text");
-  let data = $signal("");
+  let [data, setData] = createSignal<CardData>(
+    {
+      type: "text",
+      data: "",
+      width: "500px",
+      height: "300px",
+      style: 0,
+    },
+    { equals: false }
+  );
   let cardData: CardData = $signal({
     type: "text",
     data: "",
@@ -59,25 +72,27 @@ export default function adminView() {
     }
   };
   const preview = () => {
-    let temp: CardData = { type, width, height, data: "" };
+    let temp: CardData = { ...data() };
     const regex = /^\d+(\.\d+)?([A-Za-z%]+)$/;
-    if (!regex.test(width) || !regex.test(height)) {
-      temp.type = "text";
-      temp.data = "the width or height are illegal please check";
+    if (!temp.width || !regex.test(temp.width)) {
       temp.width = "300px";
-      temp.height = "120px";
-    } else {
-      if (type == "echarts") {
-        try {
-          temp.data = StoObject(data);
-        } catch (err) {
-          temp.type = "text";
-          temp.data = "the eccharts data you entered has an error please check";
-        }
-      } else {
-        temp.data = data;
-      }
+      temp.err += "the width value is illegal;";
     }
+    if (!temp.height || !regex.test(temp.height)) {
+      temp.height = "120px";
+      temp.err += "the height value is illegal;";
+    }
+
+    if (temp.type == "echarts") {
+      try {
+        temp.data = StoObject(temp.data);
+      } catch (err) {
+        temp.err += "the eccharts data you entered has an error please check;";
+      }
+    } else if (temp.style && temp.style >= 2 && temp.style <= 7) {
+      temp.data = temp.data.split("\n");
+    }
+
     cardData = temp;
   };
   return (
@@ -109,28 +124,60 @@ export default function adminView() {
               margin="dense"
               label="width"
               fullWidth
-              value={width}
+              value={data().width}
               onChange={(event) => {
-                width = event.target.value;
+                setData((cur) => {
+                  cur.width = event.target.value;
+                  return cur;
+                });
               }}
             />
             <TextField
               margin="dense"
               label="height"
               fullWidth
-              value={height}
+              value={data().height}
               onChange={(event) => {
-                height = event.target.value;
+                setData((cur) => {
+                  cur.height = event.target.value;
+                  return cur;
+                });
               }}
             />
             <FormControl fullWidth margin="dense">
-              <InputLabel id="type-select-label">Type</InputLabel>
+              <InputLabel id="type-select-label">style</InputLabel>
               <Select
-                value={type}
+                value={data().style}
                 id="type-select-label"
                 label="Type"
                 onChange={(event) => {
-                  type = event.target.value;
+                  setData((cur) => {
+                    cur.style = event.target.value;
+                    return cur;
+                  });
+                }}
+              >
+                <MenuItem value={0}>default(single)</MenuItem>
+                <MenuItem value={1}>weather</MenuItem>
+                <MenuItem value={2}>double1</MenuItem>
+                <MenuItem value={3}>double2</MenuItem>
+                <MenuItem value={4}>double3</MenuItem>
+                <MenuItem value={5}>double4</MenuItem>
+                <MenuItem value={6}>double5</MenuItem>
+                <MenuItem value={7}>double6</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl fullWidth margin="dense">
+              <InputLabel id="type-select-label">Type</InputLabel>
+              <Select
+                value={data().type}
+                id="type-select-label"
+                label="Type"
+                onChange={(event) => {
+                  setData((cur) => {
+                    cur.type = event.target.value;
+                    return cur;
+                  });
                 }}
               >
                 <MenuItem value={"text"}>Text</MenuItem>
@@ -146,9 +193,12 @@ export default function adminView() {
               label="Data"
               fullWidth
               multiline
-              value={data}
+              value={data().data}
               onChange={(event) => {
-                data = event.target.value;
+                setData((cur) => {
+                  cur.data = event.target.value;
+                  return cur;
+                });
               }}
               rows={6}
             />

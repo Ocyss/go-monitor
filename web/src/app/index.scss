@@ -1,3 +1,6 @@
-body {
-  background-color: rgb(222, 225, 230);
+* {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }

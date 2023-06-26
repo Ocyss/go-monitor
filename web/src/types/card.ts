@@ -21,4 +21,6 @@ export interface CardData {
   height?: string;
   type: "echarts" | "text" | "picture";
   data: any;
+  err?: string;
+  style?: number;
 }

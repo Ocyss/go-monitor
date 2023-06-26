@@ -1,5 +1,5 @@
 import { JSX } from "solid-js/jsx-runtime";
-// import "./index.scss";
+import "./index.scss";
 import { useRoutes } from "@solidjs/router";
 import { routes } from "@/router";
 import { Toaster } from "solid-toast";
